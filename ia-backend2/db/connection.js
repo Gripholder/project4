@@ -10,14 +10,10 @@ db.once('open', () => {
   console.log("database has been connected!");
 });
 
-let AnswerSchema = new mongoose.Schema({
-  answer: String,
-  time : { type : Date, default: Date.now }
-})
 
 let RequestSchema = new mongoose.Schema({
-  request: String,
-  answers: [AnswerSchema],
+  request: { type: String, exists: true},
+  answer: {type: String, exists: true},
   time : { type : Date, default: Date.now }
 })
 
@@ -27,6 +23,5 @@ let RequestSchema = new mongoose.Schema({
 mongoose.connect('mongodb://default:123456@ds227525.mlab.com:27525/ia');
 
 mongoose.model("Request", RequestSchema);
-mongoose.model("Answer", AnswerSchema);
 
 module.exports = mongoose

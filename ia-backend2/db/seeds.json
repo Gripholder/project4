@@ -1,10 +1,18 @@
 [
   {
     "request": "hello",
-    "answers": [
-      {"answer": "hi"},
-      {"answer": "hello"},
-      {"answer": "hey"}
-    ]
+    "answer": "hi"
+  },
+  {
+    "request": "hi",
+    "answer": "hello"
+  },
+  {
+    "request": "hey",
+    "answer": "hey there!"
+  },
+  {
+    "request": "what is your name",
+    "answer": "Mora"
   }
 ]

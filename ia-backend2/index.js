@@ -4,7 +4,6 @@ const app = express()
 const cors = require('cors')
 const mongoose = require('./db/connection.js')
 const Request = mongoose.model("Request")
-const Answer = mongoose.model("Answer")
 app.set("view engine", "hbs")
 
 
@@ -27,34 +26,27 @@ app.get('/', (req, res) => {
 
 app.get('/:text', (req, res) => {
   let text = req.params.text.toLowerCase()
-  console.log(`first Answer console log: ${Answer.find({})}`)
+  console.log(`second Answer console log:`)
   Request.findOne({request: text}).then(response => {
   if(response){
-  let textPicker = response.answers[Math.floor(Math.random() * response.answers.length)]
-  console.log(textPicker)
-  res.json(textPicker)
+  res.json(response)
 } else {
-  Request.find({}).then(request => {
-
-    console.log(request)
-  })
-  // Answer.findOne({answer: text}).then(text => {
-  //   res.json(text)
-  // })
+    console.log(response)
+    res.json(null)
 }})})
 
 app.post('/', (req, res) => {
-  Request.findOne({request: req.body.request.toLowerCase()})
-  Request.create(req.body).then(text =>
+  console.log(req.body)
+  Request.create({request: req.body.request.toLowerCase(), answer: req.body.answer.toLowerCase()}).then(text =>
       res.json(text))
     .catch(err =>
       res.json(err)
     )
   })
 
-app.post('/:text', (req, res) => {
-  let text = req.params.text
-  Request.create({content: text}).then(text => {
-    res.redirect("/")
+  // Update Answers
+  app.post('/:text', (req, res) => {
+    Request.findOneAndUpdate({request: req.params.text}, req.body, {new: true}).then(response => {
+      res.json(response)
+    })
   })
-})
