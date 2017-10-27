@@ -4,10 +4,13 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.0",
+    "object-assign": "^4.1.1",
     "react": "^16.0.0",
+    "react-addons-update": "^15.6.2",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.14",
+    "react-speech": "^0.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
